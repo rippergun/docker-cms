@@ -1,0 +1,41 @@
+application:
+  image: neoweb
+  container_name: neoweb
+  hostname: neoweb
+  expose:
+    - "9100"
+  ports:
+    - "80:80"
+    - "2222:22" # ssh
+#  entrypoint:
+  volumes:
+    - /home/projects:/home/projects
+    - /tmp/mysql.sock:/tmp/mysql.sock
+  tty: true
+  dns:
+    - 8.8.8.8
+    - 9.9.9.9
+#  extra_hosts:
+  links:
+    - mysqlaps
+  environment:
+    PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
+    XDEBUG_CONFIG: remote_host=192.168.254.254
+#redis_objects:
+#  image: redis_objects
+#  container_name: redis_objects
+#  ports:
+#    - "11217:11217"
+#  volumes:
+#      - ./redis_storage/data:/data
+#  tty: true
+mysqlaps:
+  image: mysql/mysql-server
+  container_name: mysqlaps
+  volumes:
+    - /home/projects:/home/projects
+    - /var/lib/mysql:/var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: mypass
+  ports:
+    - "3306:3306"
