@@ -25,8 +25,11 @@ RUN a2enconf php5.6-fpm
 
 RUN apt-get -y update && apt-get install -y openssh-server
 
+RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
+
 #section sites
 RUN ln -s /home/projects/babyblog2/vhost.conf /etc/apache2/sites-enabled/babyblog2.conf
+RUN ln -s /home/projects/babyblog/vhost.conf /etc/apache2/sites-enabled/babyblog.conf
 
 EXPOSE 80 3306
 CMD ["/usr/bin/supervisord"]
