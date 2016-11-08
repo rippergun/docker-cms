@@ -17,7 +17,8 @@ application:
     - 9.9.9.9
 #  extra_hosts:
   links:
-    - mysqlaps
+    - neomysql
+    - neoredis
   environment:
     PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
     XDEBUG_CONFIG: remote_host=192.168.254.254
@@ -29,9 +30,9 @@ application:
 #  volumes:
 #      - ./redis_storage/data:/data
 #  tty: true
-mysqlaps:
+neomysql:
   image: mysql/mysql-server
-  container_name: mysqlaps
+  container_name: neomysql
   volumes:
     - /home/projects:/home/projects
     - /var/lib/mysql:/var/lib/mysql
@@ -39,3 +40,9 @@ mysqlaps:
     MYSQL_ROOT_PASSWORD: mypass
   ports:
     - "3306:3306"
+neoredis:
+  image: redis:3.0.7
+  container_name: neoredis
+  command: redis-server --requirepass mypass
+  ports:
+    - "6379:6379"
