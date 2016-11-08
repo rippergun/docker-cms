@@ -14,22 +14,15 @@ application:
   tty: true
   dns:
     - 8.8.8.8
-    - 9.9.9.9
+    - 8.8.4.4
 #  extra_hosts:
   links:
     - neomysql
     - neoredis
+    - neorabbit
   environment:
     PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
     XDEBUG_CONFIG: remote_host=192.168.254.254
-#redis_objects:
-#  image: redis_objects
-#  container_name: redis_objects
-#  ports:
-#    - "11217:11217"
-#  volumes:
-#      - ./redis_storage/data:/data
-#  tty: true
 neomysql:
   image: mysql/mysql-server
   container_name: neomysql
@@ -46,3 +39,14 @@ neoredis:
   command: redis-server --requirepass mypass
   ports:
     - "6379:6379"
+neorabbit:
+  image: rabbitmq:3.6.5
+  container_name: neorabbit
+  environment:
+    RABBITMQ_DEFAULT_USER: guest
+    RABBITMQ_DEFAULT_PASS: guest
+  ports:
+  - "4369:4369"
+  - "5671:5671"
+  - "5672:5672"
+  - "25672:25672"
