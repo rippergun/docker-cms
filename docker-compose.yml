@@ -20,6 +20,7 @@ application:
     - neomysql
     - neoredis
     - neorabbit
+    - neosocketio
   environment:
     PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
     XDEBUG_CONFIG: remote_host=192.168.254.254
@@ -50,3 +51,14 @@ neorabbit:
   - "5671:5671"
   - "5672:5672"
   - "25672:25672"
+neosocketio:
+  image: neosocketio
+  container_name: neosocketio
+  extra_hosts:
+  - "www.neonovis.lan:127.0.0.1"
+  volumes:
+      - /home/projects:/home/projects
+  expose:
+  - "8888"
+  ports:
+  - "8888:8888"
