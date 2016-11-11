@@ -44,5 +44,7 @@ RUN cd /usr/src/ \
 RUN ln -s /home/projects/babyblog2/vhost.conf /etc/apache2/sites-enabled/babyblog2.conf
 RUN ln -s /home/projects/babyblog/vhost.conf /etc/apache2/sites-enabled/babyblog.conf
 
+RUN locale-gen fr_FR.UTF-8
+
 EXPOSE 80 3306
 CMD ["/usr/bin/supervisord"]
