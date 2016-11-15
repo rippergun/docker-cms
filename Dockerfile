@@ -46,5 +46,7 @@ RUN ln -s /home/projects/babyblog/vhost.conf /etc/apache2/sites-enabled/babyblog
 
 RUN locale-gen fr_FR.UTF-8
 
+RUN usermod -u 1000 www-data
+
 EXPOSE 80 3306
 CMD ["/usr/bin/supervisord"]
