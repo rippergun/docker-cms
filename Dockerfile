@@ -6,7 +6,8 @@ RUN apt-get update && apt-get install -y software-properties-common iputils-ping
 #RUN echo "deb http://ppa.launchpad.net/ondrej/php5-5.6/ubuntu xenial main" > /etc/apt/sources.list.d/ondrej-php5-5_6-xenial.list \
 #&& apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C \
 
-RUN add-apt-repository ppa:ondrej/php && apt-get -y update && apt-get install -y --allow-unauthenticated apache2 php5.6 php5.6-intl php-common php5.6-common php5.6-json php5.6-opcache php5.6-readline php5.6-cli \
+RUN add-apt-repository ppa:ondrej/php && apt-get -y update && apt-get install -y --allow-unauthenticated apache2 php5.6 php5.6-intl php-common \
+php5.6-common php5.6-json php5.6-opcache php5.6-readline php5.6-cli php5.6-gd \
 libapache2-mod-php5.6 libapache2-mod-fcgid apache2-doc apache2-utils php5.6-fpm php5.6-xml php-xdebug php5.6-zip php5.6-mbstring php5.6-dev \
 php5.6-bcmath php5.6-mysql curl supervisor libhiredis-dev git openssh-server
 
