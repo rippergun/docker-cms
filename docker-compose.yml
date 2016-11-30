@@ -55,7 +55,7 @@ neosocketio:
   image: neosocketio
   container_name: neosocketio
   extra_hosts:
-  - "www.neonovis.lan:127.0.0.1"
+  - "www4.neonovis.lan:127.0.0.1"
   volumes:
       - /home/projects:/home/projects
   expose:
