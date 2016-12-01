@@ -9,7 +9,7 @@ RUN mkdir -p /var/log/supervisor /run/php/
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 #socketio
-RUN cd /usr/local/lib && npm install socket.io request logger
+RUN cd /usr/local/lib && npm install -g socket.io request logger
 
 EXPOSE 8888
 CMD ["/usr/bin/supervisord"]
