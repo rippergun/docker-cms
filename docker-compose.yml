@@ -1,63 +1,69 @@
-application:
-  image: neoweb
-  container_name: neoweb
-  hostname: neoweb
-  expose:
-    - "9100"
-  ports:
-    - "80:80"
-    - "2222:22" # ssh
-#  entrypoint:
-  volumes:
-    - /home/projects:/home/projects
-    - /tmp/mysql.sock:/tmp/mysql.sock
-  tty: true
-  dns:
-    - 8.8.8.8
-    - 8.8.4.4
-  links:
-    - neomysql
-    - neoredis
-    - neorabbit
-    - neosocketio
-  environment:
-    PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
-    XDEBUG_CONFIG: remote_host=192.168.254.254
-neomysql:
-  image: mysql/mysql-server
-  container_name: neomysql
-  volumes:
-    - /home/projects:/home/projects
-    - /var/lib/mysql:/var/lib/mysql
-  environment:
-    MYSQL_ROOT_PASSWORD: mypass
-  ports:
-    - "3306:3306"
-neoredis:
-  image: redis:3.0.7
-  container_name: neoredis
-  command: redis-server --requirepass mypass
-  ports:
-    - "6379:6379"
-neorabbit:
-  image: rabbitmq:3.6.5
-  container_name: neorabbit
-  environment:
-    RABBITMQ_DEFAULT_USER: guest
-    RABBITMQ_DEFAULT_PASS: guest
-  ports:
-  - "4369:4369"
-  - "5671:5671"
-  - "5672:5672"
-  - "25672:25672"
-neosocketio:
-  image: neosocketio
-  container_name: neosocketio
-  extra_hosts:
-  - "www4.neonovis.lan:127.0.0.1"
-  volumes:
-      - /home/projects:/home/projects
-  expose:
-  - "8888"
-  ports:
-  - "8888:8888"
+version: '2'
+
+services:
+    neoappli:
+      image: neoweb
+      container_name: neoweb
+      hostname: neoweb
+      expose:
+        - "9100"
+      ports:
+        - "80:80"
+        - "8483:8483"
+        - "2222:22" # ssh
+    #  entrypoint:
+      extra_hosts:
+      - "www4.neonovis.lan:127.0.0.1"
+      volumes:
+        - /home/projects:/home/projects
+        - /tmp/mysql.sock:/tmp/mysql.sock
+      tty: true
+      dns:
+        - 8.8.8.8
+        - 8.8.4.4
+      links:
+        - neomysql
+        - neoredis
+        - neorabbit
+        - neosocketio
+      environment:
+        PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
+        XDEBUG_CONFIG: remote_host=192.168.254.254
+    neomysql:
+      image: mysql/mysql-server
+      container_name: neomysql
+      volumes:
+        - /home/projects:/home/projects
+        - /var/lib/mysql:/var/lib/mysql
+      environment:
+        MYSQL_ROOT_PASSWORD: mypass
+      ports:
+        - "3306:3306"
+    neoredis:
+      image: redis:3.0.7
+      container_name: neoredis
+      command: redis-server --requirepass mypass
+      ports:
+        - "6379:6379"
+    neorabbit:
+      image: rabbitmq:3.6.5
+      container_name: neorabbit
+      environment:
+        RABBITMQ_DEFAULT_USER: guest
+        RABBITMQ_DEFAULT_PASS: guest
+      ports:
+      - "4369:4369"
+      - "5671:5671"
+      - "5672:5672"
+      - "25672:25672"
+    neosocketio:
+      image: neosocketio
+      container_name: neosocketio
+    #  extra_hosts:
+    #  - "www4.neonovis.lan:127.0.0.1"
+      volumes:
+          - /home/projects:/home/projects
+      expose:
+      - "8888"
+      ports:
+      - "8888:8888"

@@ -21,6 +21,7 @@ RUN ln -fs /home/projects/cms_php/corelibs/supervisor/imgResize.conf /etc/superv
 COPY php-fpm5.6.conf /etc/php/5.6/fpm/pool.d/www.conf
 
 COPY php-conf.ini /etc/php/5.6/
+COPY ports.conf /etc/apache2/conf-enabled/
 
 RUN ln -fs /etc/php/5.6/php-conf.ini /etc/php/5.6/fpm/conf.d/ \
 && ln -fs /etc/php/5.6/php-conf.ini /etc/php/5.6/apache2/conf.d/ \
@@ -44,16 +45,17 @@ RUN cd /usr/src/ \
 && phpenmod phpiredis
 
 #section sites
-
 RUN ln -s /home/projects/babyblog2/vhost.conf /etc/apache2/sites-enabled/babyblog2.conf
 RUN ln -s /home/projects/babyblog/vhost.conf /etc/apache2/sites-enabled/babyblog.conf
 RUN ln -s /home/projects/SfBabyblog2/src/vhost.conf /etc/apache2/sites-enabled/sf-babyblog2.conf
 RUN ln -s /home/projects/philippemorize/vhost.conf /etc/apache2/sites-enabled/philippemorize.conf
 RUN ln -s /home/projects/saisonsvives/vhost.conf /etc/apache2/sites-enabled/saisonsvives.conf
+RUN ln -s /home/projects/cms_php/vhost.conf /etc/apache2/sites-enabled/neocms.conf
+
 
 RUN locale-gen fr_FR.UTF-8
 
 RUN usermod -u 1001 www-data
 
-EXPOSE 80 3306
+EXPOSE 80 8483 3306
 CMD ["/usr/bin/supervisord"]
