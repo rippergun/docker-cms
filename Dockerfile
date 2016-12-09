@@ -51,6 +51,8 @@ RUN ln -s /home/projects/SfBabyblog2/src/vhost.conf /etc/apache2/sites-enabled/s
 RUN ln -s /home/projects/philippemorize/vhost.conf /etc/apache2/sites-enabled/philippemorize.conf
 RUN ln -s /home/projects/saisonsvives/vhost.conf /etc/apache2/sites-enabled/saisonsvives.conf
 RUN ln -s /home/projects/cms_php/vhost.conf /etc/apache2/sites-enabled/neocms.conf
+RUN ln -s /home/projects/NeoPrivate/vhost.conf /etc/apache2/sites-enabled/neoprivate.conf
+RUN ln -s /home/projects/NeoPrivateWs/vhost.conf /etc/apache2/sites-enabled/neoprivatews.conf
 
 
 RUN locale-gen fr_FR.UTF-8
