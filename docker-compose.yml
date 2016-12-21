@@ -17,6 +17,7 @@ services:
       - "ws.caumes.lan:127.0.0.1"
       volumes:
         - /home/projects:/home/projects
+        - /home/ripper:/home/ripper
         - /tmp/mysql.sock:/tmp/mysql.sock
       tty: true
       dns:

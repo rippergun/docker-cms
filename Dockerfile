@@ -53,7 +53,7 @@ RUN ln -s /home/projects/saisonsvives/vhost.conf /etc/apache2/sites-enabled/sais
 RUN ln -s /home/projects/cms_php/vhost.conf /etc/apache2/sites-enabled/neocms.conf
 RUN ln -s /home/projects/NeoPrivate/vhost.conf /etc/apache2/sites-enabled/neoprivate.conf
 RUN ln -s /home/projects/NeoPrivateWs/vhost.conf /etc/apache2/sites-enabled/neoprivatews.conf
-
+RUN ln -s /home/projects/cms_services/vhost.conf /etc/apache2/sites-enabled/cms_services.conf
 
 RUN locale-gen fr_FR.UTF-8
 
