@@ -28,6 +28,7 @@ services:
         - neoredis
         - neorabbit
         - neosocketio
+        - neoelasticsearch
       environment:
         PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
         XDEBUG_CONFIG: remote_host=192.168.254.254
@@ -69,3 +70,13 @@ services:
       - "8888"
       ports:
       - "8888:8888"
+    neoelasticsearch:
+      image: elasticsearch
+      container_name: neoelasticsearch
+      volumes:
+        - /home/projects/esdata:/usr/share/elasticsearch/data
+      expose:
+      - "9200"
+      - "9300"
+      ports:
+      - "9200:9200"
