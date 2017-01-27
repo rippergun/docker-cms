@@ -11,6 +11,8 @@ php5.6-common php5.6-json php5.6-opcache php5.6-readline php5.6-cli php5.6-gd \
 libapache2-mod-php5.6 libapache2-mod-fcgid apache2-doc apache2-utils php5.6-fpm php5.6-xml php-xdebug php5.6-zip php5.6-mbstring php5.6-dev \
 php5.6-bcmath php5.6-mysql curl supervisor libhiredis-dev git openssh-server
 
+RUN mkdir /var/run/sshd && chmod 0755 /var/run/sshd
+
 #supervisor
 RUN mkdir -p /var/log/supervisor /run/php/
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
@@ -59,5 +61,5 @@ RUN locale-gen fr_FR.UTF-8
 
 RUN usermod -u 1001 www-data
 
-EXPOSE 80 8483 3306
+EXPOSE 80 8483 3306 22
 CMD ["/usr/bin/supervisord"]

@@ -19,6 +19,7 @@ services:
         - /home/projects:/home/projects
         - /home/ripper:/home/ripper
         - /tmp/mysql.sock:/tmp/mysql.sock
+        - ./ssh:/root/.ssh/
       tty: true
       dns:
         - 8.8.8.8
