@@ -1,6 +1,7 @@
 ## sur le host : 
 ```
 cat /$USER$/.ssh/id_rsa.pub > ssh/authorized_keys
+chmod 700 .ssh
 ```
 ## dans le container :
 ```
