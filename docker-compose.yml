@@ -2,7 +2,7 @@ version: '2'
 
 services:
     neoappli:
-      image: neoweb
+      image: neoweb7
       container_name: neoweb
       hostname: neoweb
       expose:
