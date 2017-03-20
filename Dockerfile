@@ -60,14 +60,13 @@ RUN ln -s /home/projects/cms_services/vhost.conf /etc/apache2/sites-enabled/cms_
 
 RUN locale-gen fr_FR.UTF-8
 
-RUN apt-get install -y php-ast
+RUN apt-get install -y --allow-unauthenticated php-ast
 RUN cd /tmp && git clone https://github.com/nikic/php-ast.git && cd php-ast \
 && phpize && ./configure && make && make install && echo "extension=ast.so" > /etc/php/7.1/mods-available/ast.ini && phpenmod ast
 
 RUN usermod -u 1001 www-data
 
-RUN ENV=dev
-RUN export ENV
+ENV env dev
 
 EXPOSE 80 8483 3306 22
 CMD ["/usr/bin/supervisord"]
