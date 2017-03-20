@@ -61,8 +61,7 @@ RUN locale-gen fr_FR.UTF-8
 
 RUN usermod -u 1001 www-data
 
-RUN ENV=dev
-RUN export ENV
+ENV env dev
 
 EXPOSE 80 8483 3306 22
 CMD ["/usr/bin/supervisord"]
