@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y software-properties-common iputils-ping
 RUN add-apt-repository ppa:ondrej/php && apt-get -y update && apt-get install -y --allow-unauthenticated apache2 php7.1 php7.1-intl php-common \
 php7.1-common php7.1-json php7.1-opcache php7.1-readline php7.1-cli php7.1-gd \
 libapache2-mod-php7.1 libapache2-mod-fcgid apache2-doc apache2-utils php7.1-fpm php7.1-xml php-xdebug php7.1-zip php7.1-mbstring php7.1-dev \
-php7.1-bcmath php7.1-mysql curl supervisor libhiredis-dev git openssh-server php7.1-curl php7.1-gmp php7.1-libsodium php7.1-amqp
+php7.1-bcmath php7.1-mysql curl supervisor libhiredis-dev git openssh-server php7.1-curl php7.1-gmp php-libsodium php-amqp
 
 RUN mkdir /var/run/sshd && chmod 0755 /var/run/sshd
 
