@@ -68,9 +68,9 @@ services:
       volumes:
           - /home/projects:/home/projects
       expose:
-      - "8888"
+      - "8585"
       ports:
-      - "8888:8888"
+      - "8585:8585"
     neoelasticsearch:
       image: elasticsearch
       container_name: neoelasticsearch
