@@ -47,6 +47,12 @@ RUN cd /usr/src/ \
 && echo "extension=phpiredis.so" > /etc/php/7.1/mods-available/phpiredis.ini \
 && phpenmod phpiredis
 
+RUN locale-gen fr_FR.UTF-8
+
+RUN apt-get install -y --allow-unauthenticated php-ast
+RUN cd /tmp && git clone https://github.com/nikic/php-ast.git && cd php-ast \
+&& phpize && ./configure && make && make install && echo "extension=ast.so" > /etc/php/7.1/mods-available/ast.ini && phpenmod ast
+
 #section sites
 RUN ln -s /home/projects/babyblog2/vhost.conf /etc/apache2/sites-enabled/babyblog2.conf
 RUN ln -s /home/projects/babyblog/vhost.conf /etc/apache2/sites-enabled/babyblog.conf
@@ -54,15 +60,11 @@ RUN ln -s /home/projects/SfBabyblog2/src/vhost.conf /etc/apache2/sites-enabled/s
 RUN ln -s /home/projects/philippemorize/vhost.conf /etc/apache2/sites-enabled/philippemorize.conf
 RUN ln -s /home/projects/saisonsvives/vhost.conf /etc/apache2/sites-enabled/saisonsvives.conf
 RUN ln -s /home/projects/cms_php/vhost.conf /etc/apache2/sites-enabled/neocms.conf
-RUN ln -s /home/projects/NeoPrivate/vhost.conf /etc/apache2/sites-enabled/neoprivate.conf
-RUN ln -s /home/projects/NeoPrivateWs/vhost.conf /etc/apache2/sites-enabled/neoprivatews.conf
+#RUN ln -s /home/projects/NeoPrivate/vhost.conf /etc/apache2/sites-enabled/neoprivate.conf
+RUN ln -s /home/projects/NeoPrivateSf/vhost.conf /etc/apache2/sites-enabled/neoprivatesf.conf
+#RUN ln -s /home/projects/NeoPrivateWs/vhost.conf /etc/apache2/sites-enabled/neoprivatews.conf
+RUN ln -s /home/projects/NeoPrivateWsSf/vhost.conf /etc/apache2/sites-enabled/neoprivatewssf.conf
 RUN ln -s /home/projects/cms_services/vhost.conf /etc/apache2/sites-enabled/cms_services.conf
-
-RUN locale-gen fr_FR.UTF-8
-
-RUN apt-get install -y --allow-unauthenticated php-ast
-RUN cd /tmp && git clone https://github.com/nikic/php-ast.git && cd php-ast \
-&& phpize && ./configure && make && make install && echo "extension=ast.so" > /etc/php/7.1/mods-available/ast.ini && phpenmod ast
 
 RUN usermod -u 1001 www-data
 
