@@ -11,5 +11,5 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 #socketio
 RUN cd /usr/local/lib && npm install -g socket.io request logger
 
-EXPOSE 8888
+EXPOSE 8585
 CMD ["/usr/bin/supervisord"]

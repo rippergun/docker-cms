@@ -1,8 +1,8 @@
-version: '2'
+version: '2.1'
 
 services:
     neoappli:
-      image: neoweb
+      image: neoweb7
       container_name: neoweb
       hostname: neoweb
       expose:
@@ -68,9 +68,9 @@ services:
       volumes:
           - /home/projects:/home/projects
       expose:
-      - "8888"
+      - "8585"
       ports:
-      - "8888:8888"
+      - "8585:8585"
     neoelasticsearch:
       image: elasticsearch
       container_name: neoelasticsearch
