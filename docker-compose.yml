@@ -45,7 +45,7 @@ services:
       ports:
         - "3306:3306"
     neoredis:
-      image: redis:3.0.7
+      image: redis:4
       container_name: neoredis
       command: redis-server --requirepass mypass
       ports:
