@@ -32,8 +32,9 @@ services:
         - neosocketio
         - neoelasticsearch
       environment:
-        PHP_XDEBUG_ENABLED: 1 # Set 1 to enable.
-        XDEBUG_CONFIG: remote_host=192.168.254.254
+        - PHP_XDEBUG_ENABLED=1 # Set 1 to enable.
+#        - XDEBUG_CONFIG= remote_host=192.168.254.254
+        - VIRTUAL_HOST=*.caumes.lan,*.neonovis.lan
     neomysql:
       image: mysql/mysql-server
       container_name: neomysql
