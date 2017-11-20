@@ -64,7 +64,8 @@ RUN ln -s /home/projects/cms_php/vhost.conf /etc/apache2/sites-enabled/neocms.co
 RUN ln -s /home/projects/NeoPrivateSf/vhost.conf /etc/apache2/sites-enabled/neoprivatesf.conf
 #RUN ln -s /home/projects/NeoPrivateWs/vhost.conf /etc/apache2/sites-enabled/neoprivatews.conf
 RUN ln -s /home/projects/NeoPrivateWsSf/vhost.conf /etc/apache2/sites-enabled/neoprivatewssf.conf
-RUN ln -s /home/projects/cms_services/vhost.conf /etc/apache2/sites-enabled/cms_services.conf
+#RUN ln -s /home/projects/cms_services/vhost.conf /etc/apache2/sites-enabled/cms_services.conf
+RUN ln -s /home/projects/NeoServices/vhost.conf /etc/apache2/sites-enabled/neoservices.conf
 
 RUN usermod -u 1001 www-data
 

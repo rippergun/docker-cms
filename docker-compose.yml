@@ -14,7 +14,8 @@ services:
     #  entrypoint:
       extra_hosts:
       - "www4.neonovis.lan:127.0.0.1"
-      - "ws.caumes.lan:127.0.0.1"
+      - "sebastien-ws.caumes.lan:127.0.0.1"
+      - "vanina-ws.caumes.lan:127.0.0.1"
       volumes:
         - /home/projects:/home/projects
         - /home/ripper:/home/ripper
