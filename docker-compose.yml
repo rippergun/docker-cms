@@ -1,4 +1,4 @@
-version: '2.1'
+version: '2.4'
 
 services:
     neoappli:
@@ -83,3 +83,8 @@ services:
       - "9300"
       ports:
       - "9200:9200"
+
+networks:
+  neo:
+      external: true
+      name: neo
