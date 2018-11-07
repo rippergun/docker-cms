@@ -2,7 +2,7 @@ version: '2.4'
 
 services:
     neoappli:
-      image: neoweb7
+      image: neoweb
       container_name: neoweb
       hostname: neoweb
       expose:
@@ -21,6 +21,7 @@ services:
         - /home/ripper:/home/ripper
         - /tmp/mysql.sock:/tmp/mysql.sock
         - ./ssh:/root/.ssh/
+        - ./composer:/root/.composer/
       tty: true
       dns:
         - 8.8.8.8
@@ -40,6 +41,7 @@ services:
       container_name: neomysql
       volumes:
         - /home/projects:/home/projects
+        - /var/log/mysql:/var/log/mysql
         - /var/lib/mysql:/var/lib/mysql
       environment:
         MYSQL_ROOT_PASSWORD: mypass
@@ -84,7 +86,7 @@ services:
       ports:
       - "9200:9200"
 
-networks:
-  neo:
-      external: true
-      name: neo
+#networks:
+#  neo:
+#      external: true
+#      name: neo

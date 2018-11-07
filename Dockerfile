@@ -1,12 +1,13 @@
 # This is a comment
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 MAINTAINER rippergun <rippergun@hotmail.com>
-RUN apt-get update && apt-get install -y software-properties-common iputils-ping vim inetutils-telnet
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y software-properties-common iputils-ping vim inetutils-telnet
 
 #RUN echo "deb http://ppa.launchpad.net/ondrej/php5-7.2/ubuntu xenial main" > /etc/apt/sources.list.d/ondrej-php5-5_6-xenial.list \
 #&& apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C \
 
-RUN LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php && apt-get -y update && apt-get install -y --allow-unauthenticated apache2 php7.2 php7.2-intl php-common \
+
+RUN LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php && apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-unauthenticated apache2 php7.2 php7.2-intl php-common \
 php7.2-common php7.2-json php7.2-opcache php7.2-readline php7.2-cli php7.2-gd \
 libapache2-mod-php7.2 libapache2-mod-fcgid apache2-doc apache2-utils php7.2-fpm php7.2-xml php-xdebug php7.2-zip php7.2-mbstring php7.2-dev \
 php7.2-bcmath php7.2-mysql curl supervisor libhiredis-dev git openssh-server php7.2-curl php7.2-gmp php-amqp
@@ -47,13 +48,13 @@ RUN cd /usr/src/ \
 && echo "extension=phpiredis.so" > /etc/php/7.2/mods-available/phpiredis.ini \
 && phpenmod phpiredis
 
-RUN locale-gen fr_FR.UTF-8
+RUN apt-get clean && apt-get update && apt-get install -y locales && locale-gen fr_FR.UTF-8
 
-RUN apt-get update && apt-get install -y --allow-unauthenticated php-ast
+RUN apt-get update && apt-get install -y --allow-unauthenticated php-ast php-apcu
 RUN cd /tmp && git clone https://github.com/nikic/php-ast.git && cd php-ast \
 && phpize && ./configure && make && make install && echo "extension=ast.so" > /etc/php/7.2/mods-available/ast.ini && phpenmod ast
 
-RUN apt-get update && apt-get install -y php-apcu
+#RUN apt-get update && apt-get install -y php-apcu
 
 #section sites
 RUN ln -s /home/projects/babyblog2/vhost.conf /etc/apache2/sites-enabled/babyblog2.conf
@@ -69,6 +70,7 @@ RUN ln -s /home/projects/NeoPrivateWsSf/vhost.conf /etc/apache2/sites-enabled/ne
 #RUN ln -s /home/projects/cms_services/vhost.conf /etc/apache2/sites-enabled/cms_services.conf
 RUN ln -s /home/projects/NeoServices/vhost.conf /etc/apache2/sites-enabled/neoservices.conf
 RUN ln -s /home/projects/cms_php_sf/vhost.conf /etc/apache2/sites-enabled/cms_php_sf.conf
+RUN ln -s /home/projects/phpmyadmin.conf /etc/apache2/sites-enabled/phpmyadmin.conf
 
 RUN usermod -u 1001 www-data
 
