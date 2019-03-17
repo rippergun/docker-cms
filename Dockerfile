@@ -3,14 +3,14 @@ FROM ubuntu:18.04
 MAINTAINER rippergun <rippergun@hotmail.com>
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y software-properties-common iputils-ping vim inetutils-telnet
 
-#RUN echo "deb http://ppa.launchpad.net/ondrej/php5-7.2/ubuntu xenial main" > /etc/apt/sources.list.d/ondrej-php5-5_6-xenial.list \
+#RUN echo "deb http://ppa.launchpad.net/ondrej/php5-7.3/ubuntu xenial main" > /etc/apt/sources.list.d/ondrej-php5-5_6-xenial.list \
 #&& apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C \
 
 
-RUN LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php && apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-unauthenticated apache2 php7.2 php7.2-intl php-common \
-php7.2-common php7.2-json php7.2-opcache php7.2-readline php7.2-cli php7.2-gd \
-libapache2-mod-php7.2 libapache2-mod-fcgid apache2-doc apache2-utils php7.2-fpm php7.2-xml php-xdebug php7.2-zip php7.2-mbstring php7.2-dev \
-php7.2-bcmath php7.2-mysql curl supervisor libhiredis-dev git openssh-server php7.2-curl php7.2-gmp php-amqp
+RUN LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php && apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-unauthenticated apache2 php7.3 php7.3-intl php-common \
+php7.3-common php7.3-json php7.3-opcache php7.3-readline php7.3-cli php7.3-gd \
+libapache2-mod-php7.3 libapache2-mod-fcgid apache2-doc apache2-utils php7.3-fpm php7.3-xml php-xdebug php7.3-zip php7.3-mbstring php7.3-dev \
+php7.3-bcmath php7.3-mysql curl supervisor libhiredis-dev git openssh-server php7.3-curl php7.3-gmp php-amqp
 
 RUN mkdir /var/run/sshd && chmod 0755 /var/run/sshd
 
@@ -22,19 +22,19 @@ RUN ln -fs /home/projects/cms_php/corelibs/supervisor/imgResize.conf /etc/superv
 
 #php fpm
 
-COPY php-fpm7.2.conf /etc/php/7.2/fpm/pool.d/www.conf
+COPY php-fpm7.3.conf /etc/php/7.3/fpm/pool.d/www.conf
 
-COPY php-conf.ini /etc/php/7.2/
+COPY php-conf.ini /etc/php/7.3/
 COPY ports.conf /etc/apache2/conf-enabled/
 
-RUN ln -fs /etc/php/7.2/php-conf.ini /etc/php/7.2/fpm/conf.d/ \
-&& ln -fs /etc/php/7.2/php-conf.ini /etc/php/7.2/apache2/conf.d/ \
-&& ln -fs /etc/php/7.2/php-conf.ini /etc/php/7.2/cli/conf.d/
+RUN ln -fs /etc/php/7.3/php-conf.ini /etc/php/7.3/fpm/conf.d/ \
+&& ln -fs /etc/php/7.3/php-conf.ini /etc/php/7.3/apache2/conf.d/ \
+&& ln -fs /etc/php/7.3/php-conf.ini /etc/php/7.3/cli/conf.d/
 
-RUN a2enmod proxy rewrite proxy_fcgi setenvif headers && a2dismod php7.2 mpm_prefork && a2enmod mpm_worker
+RUN a2enmod proxy rewrite proxy_fcgi setenvif headers && a2dismod php7.3 mpm_prefork && a2enmod mpm_worker
 RUN chown -R www-data:www-data /usr/lib/cgi-bin
-RUN touch /usr/lib/cgi-bin/php7.2-fcgi
-RUN a2enconf php7.2-fpm
+RUN touch /usr/lib/cgi-bin/php7.3-fcgi
+RUN a2enconf php7.3-fpm
 
 #composer
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
@@ -45,14 +45,14 @@ RUN cd /usr/src/ \
 && cd /usr/src/phpiredis \
 && phpize && ./configure --enable-phpiredis \
 && make && make install \
-&& echo "extension=phpiredis.so" > /etc/php/7.2/mods-available/phpiredis.ini \
+&& echo "extension=phpiredis.so" > /etc/php/7.3/mods-available/phpiredis.ini \
 && phpenmod phpiredis
 
 RUN apt-get clean && apt-get update && apt-get install -y locales && locale-gen fr_FR.UTF-8
 
 RUN apt-get update && apt-get install -y --allow-unauthenticated php-ast php-apcu
 RUN cd /tmp && git clone https://github.com/nikic/php-ast.git && cd php-ast \
-&& phpize && ./configure && make && make install && echo "extension=ast.so" > /etc/php/7.2/mods-available/ast.ini && phpenmod ast
+&& phpize && ./configure && make && make install && echo "extension=ast.so" > /etc/php/7.3/mods-available/ast.ini && phpenmod ast
 
 #RUN apt-get update && apt-get install -y php-apcu
 
