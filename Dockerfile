@@ -55,6 +55,10 @@ RUN cd /tmp && git clone https://github.com/nikic/php-ast.git && cd php-ast \
 && phpize && ./configure && make && make install && echo "extension=ast.so" > /etc/php/7.3/mods-available/ast.ini && phpenmod ast
 
 #RUN apt-get update && apt-get install -y php-apcu
+RUN pecl install timezonedb
+&& echo "extension=timezonedb.so" > /etc/php/7.3/mods-available/timezonedb.ini \
+&& phpenmod timezonedb
+
 
 #section sites
 RUN ln -s /home/projects/babyblog2/vhost.conf /etc/apache2/sites-enabled/babyblog2.conf
