@@ -31,7 +31,7 @@ services:
         - neoredis
         - neorabbit
         - neosocketio
-        - neoelasticsearch
+#        - neoelasticsearch
       environment:
         - PHP_XDEBUG_ENABLED=1 # Set 1 to enable.
 #        - XDEBUG_CONFIG= remote_host=192.168.254.254
@@ -54,37 +54,38 @@ services:
       ports:
         - "6379:6379"
     neorabbit:
-      image: rabbitmq:3.6.5
+      image: rabbitmq:3.7-management
       container_name: neorabbit
       environment:
         RABBITMQ_DEFAULT_USER: guest
         RABBITMQ_DEFAULT_PASS: guest
       ports:
-      - "4369:4369"
-      - "5671:5671"
-      - "5672:5672"
-      - "25672:25672"
+        - "4369:4369"
+        - "5671:5671"
+        - "5672:5672"
+        - "25672:25672"
+        - "15672:15672"
     neosocketio:
       image: neosocketio
       container_name: neosocketio
-    #  extra_hosts:
-    #  - "www4.neonovis.lan:127.0.0.1"
+#      extra_hosts:
+#      - "www4.neonovis.lan:neoweb"
       volumes:
           - /home/projects:/home/projects
       expose:
       - "8585"
       ports:
       - "8585:8585"
-    neoelasticsearch:
-      image: elasticsearch
-      container_name: neoelasticsearch
-      volumes:
-        - /home/projects/esdata:/usr/share/elasticsearch/data
-      expose:
-      - "9200"
-      - "9300"
-      ports:
-      - "9200:9200"
+#    neoelasticsearch:
+#      image: elasticsearch
+#      container_name: neoelasticsearch
+#      volumes:
+#        - /home/projects/esdata:/usr/share/elasticsearch/data
+#      expose:
+#      - "9200"
+#      - "9300"
+#      ports:
+#      - "9200:9200"
 
 #networks:
 #  neo:
