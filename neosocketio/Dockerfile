@@ -1,4 +1,4 @@
-FROM node:7.0
+FROM node:8.16
 MAINTAINER rippergun <rippergun@hotmail.com>
 
 RUN apt-get -y update && apt-get install -y --allow-unauthenticated  vim supervisor
