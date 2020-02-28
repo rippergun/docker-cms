@@ -1,3 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/
 .idea/*
+!/ssh/known_hosts
+!/ssh/id_rsa
