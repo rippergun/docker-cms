@@ -22,9 +22,8 @@ services:
         - /tmp/mysql.sock:/tmp/mysql.sock
         - ./ssh:/root/.ssh/
         - ./composer:/root/.composer/
-        - /home/projects/babyblog2/vhost.conf:/etc/apache2/sites-enabled/babyblog2.conf:ro
+        - /home/projects/maxence/vhost.conf:/etc/apache2/sites-enabled/maxence.conf:ro
         - /home/projects/babyblog/vhost.conf:/etc/apache2/sites-enabled/babyblog.conf:ro
-        - /home/projects/SfBabyblog2/src/vhost.conf /et:/apache2/sites-enabled/sf-babyblog2.conf:ro
         - /home/projects/philippemorize/vhost.conf:/etc/apache2/sites-enabled/philippemorize.conf:ro
         - /home/projects/saisonsvives/vhost.conf:/etc/apache2/sites-enabled/saisonsvives.conf:ro
         - /home/projects/cms_php/vhost.conf:/etc/apache2/sites-enabled/neocms.conf:ro
