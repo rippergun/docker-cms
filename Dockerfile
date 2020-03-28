@@ -57,7 +57,11 @@ RUN pecl install timezonedb \
 
 RUN usermod -u 1001 www-data
 
+RUN a2enmod ssl
+
+RUN a2dismod mpm_worker mpm_prefork && a2enmod mpm_event http2
+
 ENV env dev
 
-EXPOSE 80 8483 3306 22
+EXPOSE 80 443 8483 3306 22
 CMD ["/usr/bin/supervisord"]
