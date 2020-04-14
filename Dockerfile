@@ -61,6 +61,8 @@ RUN a2enmod ssl
 
 RUN a2dismod mpm_worker mpm_prefork && a2enmod mpm_event http2
 
+RUN apt-get update && apt-get install -y --allow-unauthenticated unzip
+
 ENV env dev
 
 EXPOSE 80 443 8483 3306 22
