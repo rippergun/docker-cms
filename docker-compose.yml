@@ -2,7 +2,7 @@ version: '2.4'
 
 services:
     neoappli:
-      image: rippergun/neonovis:7.4
+      image: rippergun/neonovis:8.0
       container_name: neoweb
       hostname: neoweb
       expose:
