@@ -1,8 +1,8 @@
-version: '2.4'
+version: '3.0'
 
 services:
     neoappli:
-      image: rippergun/neonovis:8.0
+      image: rippergun/neonovis:${NEO_PHP:-8.0}
       container_name: neoweb
       hostname: neoweb
       expose:
