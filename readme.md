@@ -1,3 +1,15 @@
+## build des images
+```
+sudo docker build -t rippergun/neonovis:8.0 .
+
+cd neosocketio && sudo docker build -t neosocketio .
+```
+
+## envoyer sur le hub
+```
+docker push rippergun/neonovis:8.0
+```
+
 ## sur le host : 
 ```
 cat /$USER$/.ssh/id_rsa.pub > ssh/authorized_keys
