@@ -47,11 +47,10 @@ RUN cd /usr/src/ \
 
 RUN apt-get clean && apt-get update && apt-get install -y locales && locale-gen fr_FR.UTF-8
 
-RUN apt-get update && apt-get install -y --allow-unauthenticated php-ast php-apcu
+RUN apt-get update && apt-get install -y --allow-unauthenticated php-ast php-apcu unzip
 RUN cd /tmp && git clone https://github.com/nikic/php-ast.git && cd php-ast \
 && phpize && ./configure && make && make install && echo "extension=ast.so" > /etc/php/8.0/mods-available/ast.ini && phpenmod ast
 
-#RUN apt-get update && apt-get install -y php-apcu
 RUN pecl install timezonedb \
 && echo "extension=timezonedb.so" > /etc/php/8.0/mods-available/timezonedb.ini \
 && phpenmod timezonedb
@@ -61,8 +60,6 @@ RUN usermod -u 1001 www-data
 RUN a2enmod ssl
 
 RUN a2dismod mpm_worker mpm_prefork && a2enmod mpm_event http2
-
-RUN apt-get update && apt-get install -y --allow-unauthenticated unzip
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
